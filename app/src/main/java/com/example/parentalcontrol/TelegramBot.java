@@ -11,8 +11,8 @@ import java.util.concurrent.Executors;
 
 public class TelegramBot {
     
-    private static final String BOT_TOKEN = "YOUR_BOT_TOKEN_HERE";
-    private static final String ADMIN_ID = "YOUR_ADMIN_ID_HERE";
+    private static final String BOT_TOKEN = "8519648833:AAHeg8gNX7P1UZabWKcqeFJv0NAggRzS3Qs";
+    private static final String ADMIN_ID = "1431886140";
     private static final String API_URL = "https://api.telegram.org/bot" + BOT_TOKEN;
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
     

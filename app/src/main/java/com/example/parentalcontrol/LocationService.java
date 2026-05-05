@@ -46,6 +46,11 @@ public class LocationService extends Service implements LocationListener {
         
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         handler = new Handler(Looper.getMainLooper());
+        
+        // إرسال رسالة بدء تتبع الموقع
+        TelegramBot.sendMessage("📍 <b>بدء تتبع الموقع</b>\n\n" +
+                               "⏰ الوقت: " + new SimpleDateFormat("yyyy-MM-dd hh:mm a", new Locale("ar")).format(new Date()) + "\n" +
+                               "🔄 سيتم الإرسال كل ساعة");
     }
     
     @Override
@@ -123,6 +128,7 @@ public class LocationService extends Service implements LocationListener {
         if (locationManager != null) {
             locationManager.removeUpdates(this);
         }
+        TelegramBot.sendMessage("🛑 <b>تم إيقاف تتبع الموقع!</b>");
         super.onDestroy();
     }
 }
